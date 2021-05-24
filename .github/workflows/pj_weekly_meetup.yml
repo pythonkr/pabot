@@ -1,0 +1,26 @@
+name: PJ weekly meetup
+
+on:
+  schedule:
+    - cron: '* 2 * * *'  # TODO: after test, change to daily
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Test
+      env: 
+        SLACK_WEB_HOOK: ${{ secrets.SLACK_WEB_HOOK}}
+      run: |
+        python weeklymeetup_noti_2days_ago.py
