@@ -20,7 +20,9 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test
-      env: 
+      env:
         SLACK_WEB_HOOK: ${{ secrets.SLACK_WEB_HOOK}}
+        PYCON_ICON_URL: ${{ secrets.PYCON_ICON_URL}}
+        PYCON_WEEKLY_DOC_URL: ${{ secrets.PYCON_WEEKLY_DOC_URL}}
       run: |
         python weeklymeetup_noti_2days_ago.py
