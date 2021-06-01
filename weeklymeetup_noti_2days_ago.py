@@ -10,7 +10,7 @@ NOW_TS = datetime.now().timestamp()
 
 
 def main():
-    noti_1day_ago()
+    noti_2day_ago()
 
 
 def send_slack_message(slack_data):
@@ -21,7 +21,7 @@ def send_slack_message(slack_data):
         raise Exception(response.status_code, response.text)
 
 
-def noti_1day_ago():
+def noti_2day_ago():
     if datetime.now().weekday() != 0:
         print('Notify only Monday')
         return
@@ -45,9 +45,9 @@ def noti_1day_ago():
                 "author_name": "PyconKR",
                 "author_link": "http://pycon.kr/",
                 "author_icon": PYCON_ICON_URL,
-                "title": "회의록",
-                "title_link": PYCON_WEEKLY_DOC_URL,
                 "text": "--------------------------",
+                "title": ":memo: 회의록",
+                "title_link": PYCON_WEEKLY_DOC_URL,
                 "fields": [
                     {
                         "title": title,
