@@ -36,7 +36,7 @@ def noti_1day_ago():
     slack_data = {
         "username": "정기회의",
         "icon_emoji": ":meow_wow:",
-        "channel": "@byungwoojeon",  # FIXME: test 이후에 채널로 변경
+        "channel": "#0-general",
         "attachments": [
             {
                 "fallback": "Required plain-text summary of the attachment.",
@@ -45,7 +45,7 @@ def noti_1day_ago():
                 "author_name": "PyconKR",
                 "author_link": "http://pycon.kr/",
                 "author_icon": PYCON_ICON_URL,
-                "title": "회의록 링크: (Google Drive) ;;;docs는 찾는중",
+                "title": "회의록",
                 "title_link": PYCON_WEEKLY_DOC_URL,
                 "text": "--------------------------",
                 "fields": [
