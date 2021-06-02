@@ -2,7 +2,7 @@ name: PJ weekly meetup
 
 on:
   schedule:
-    - cron: '0 9 * * *'  # KST 18:00
+    - cron: '0 10 * * *'  # KST 19:00
 
 jobs:
   build:
