@@ -5,6 +5,7 @@ from datetime import datetime
 WEB_HOOK_URL = os.environ["SLACK_WEB_HOOK"]
 PYCON_ICON_URL = os.environ["PYCON_ICON_URL"]
 PYCON_WEEKLY_DOC_URL = os.environ["PYCON_WEEKLY_DOC_URL"]
+ZOOM_LINK = os.environ["ZOOM_LINK"]
 NOW_TS = datetime.now().timestamp()
 
 
@@ -45,17 +46,23 @@ def noti_1hour_ago():
                 ],
                 "actions": [
                     {
-                        "name": "note",
-                        "text": "회의록",
                         "type": "button",
-                        "value": "https://drive.google.com/drive/u/2/folders/1vmq1CL6C6zGh12PCuqLlALWFOOIks5RV"
+                        "text": {
+                            "type": ":zoom: Zoom 링크",
+                            "text": "link",
+                            },
+                        "style": "primary",
+                        "url": ZOOM_LINK,
                     },
                     {
-                        "name": "Zoomlink",
-                        "text": "Zoom 링크>",
                         "type": "button",
-                        "value": "<https://www.google.com|Zoom 링크>",
-                    },
+                        "text": {
+                            "type": ":memo: 회의록",
+                            "text": "link",
+                            },
+                        "style": "primary",
+                        "url": PYCON_WEEKLY_DOC_URL,
+                    }
                 ]
             }
         ]

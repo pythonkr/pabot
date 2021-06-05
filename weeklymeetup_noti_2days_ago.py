@@ -39,15 +39,15 @@ def noti_2day_ago():
         "channel": "#0-general",
         "attachments": [
             {
-                "fallback": "Required plain-text summary of the attachment.",
-                "color": "#9733EE",
+                "fallback": "파준위 정기회의",
+                "color": "#F3DE63",
                 "pretext": "<!channel> 회의 참여 가능 여부를 이모지로 알려주세요~",
                 "author_name": "PyconKR",
                 "author_link": "http://pycon.kr/",
                 "author_icon": PYCON_ICON_URL,
-                "text": "--------------------------",
-                "title": ":memo: 회의록",
-                "title_link": PYCON_WEEKLY_DOC_URL,
+                # "text": "--------------------------",
+                # "title": ":memo: 회의록",
+                # "title_link": PYCON_WEEKLY_DOC_URL,
                 "fields": [
                     {
                         "title": title,
@@ -55,10 +55,21 @@ def noti_2day_ago():
                         "short": "false",
                     }
                 ],
+                "actions": [
+                    {
+                        "type": "button",
+                        "text": {
+                            "type": ":memo: 회의록",
+                            "text": "link",
+                            },
+                        "style": "primary",
+                        "url": PYCON_WEEKLY_DOC_URL,
+                    }
+                ],
                 # "image_url": "xxxxxxxxxxx",  # 메시지 하단의 미리보기 image
                 # "thumb_url": "xxxxxxxxxxx",  # title 옆에 이미지 보임
-                "footer": "PyconKR",
-                "footer_icon": PYCON_ICON_URL,
+                # "footer": "PyconKR",
+                # "footer_icon": PYCON_ICON_URL,
                 "ts": NOW_TS
             }
         ]

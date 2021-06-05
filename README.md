@@ -26,6 +26,7 @@ Reference
 - Slack
 -- 메시징 매뉴얼:  https://api.slack.com/messaging/composing/layouts
 -- @xxx 호출    : https://slack.com/intl/en-kr/help/articles/202009646-Notify-a-channel-or-workspace
+-- Attachment   : https://api.slack.com/messaging/composing/layouts#attachments
 
 - Github
 -- github actions   : https://docs.github.com/en/actions
