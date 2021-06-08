@@ -22,9 +22,9 @@ def send_slack_message(slack_data):
 
 
 def noti_1hour_ago():
-    # if datetime.now().weekday() != 3:
-    #     print('Notify only Wednesday')
-    #     return
+    if datetime.now().weekday() != 3:
+        print('Notify only Wednesday')
+        return
     message = (f'{"오늘 이야기하고 싶으신 내용이 있다면"}\n'
                f'{"회의록에 먼저 작성해주세요"}\n'
                f'{"혹은 오늘 회의록을 먼저 읽고 참석해주세요~ :wink:"}\n'
