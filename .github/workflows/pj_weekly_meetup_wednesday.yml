@@ -24,5 +24,7 @@ jobs:
         SLACK_WEB_HOOK: ${{ secrets.SLACK_WEB_HOOK}}
         PYCON_ICON_URL: ${{ secrets.PYCON_ICON_URL}}
         PYCON_WEEKLY_DOC_URL: ${{ secrets.PYCON_WEEKLY_DOC_URL}}
+        ZOOM_LINK: ${{ secrets.ZOOM_LINK}}
+        
       run: |
         python weeklymeetup_noti_1hour_ago.py
