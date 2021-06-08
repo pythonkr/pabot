@@ -32,7 +32,7 @@ def noti_1hour_ago():
     slack_data = {
         "username": "정기회의",
         "icon_emoji": ":meow_wow:",
-        "channel": "@byungwoojeon",
+        "channel": "#0-general",
         "attachments": [
             {
                 "fallback": "Weekly Meetup",
