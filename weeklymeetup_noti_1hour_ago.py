@@ -5,7 +5,9 @@ from datetime import datetime
 WEB_HOOK_URL = os.environ["SLACK_WEB_HOOK"]
 PYCON_ICON_URL = os.environ["PYCON_ICON_URL"]
 PYCON_WEEKLY_DOC_URL = os.environ["PYCON_WEEKLY_DOC_URL"]
-ZOOM_LINK = os.environ["ZOOM_LINK"]
+GATHERTOWN_LINK = os.environ["GATHERTOWN_LINK"]
+# ZOOM_LINK = os.environ["ZOOM_LINK"]
+
 NOW_TS = datetime.now().timestamp()
 
 
@@ -48,11 +50,11 @@ def noti_1hour_ago():
                     {
                         "type": "button",
                         "text": {
-                            "type": ":zoom: Zoom 링크",
+                            "type": "GatherTown 링크",
                             "text": "link",
                             },
                         "style": "primary",
-                        "url": ZOOM_LINK,
+                        "url": GATHERTOWN_LINK,
                     },
                     {
                         "type": "button",
