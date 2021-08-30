@@ -35,7 +35,7 @@ def noti_2day_ago():
                )
     slack_data = {
         "username": "정기회의",
-        "icon_emoji": ":meow_wow:",
+        "icon_emoji": ":pyonkr:",
         "channel": "#0-general",
         "attachments": [
             {
