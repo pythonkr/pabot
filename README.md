@@ -1,3 +1,6 @@
+
+[![PJ weekly meetup](https://github.com/pythonkr/pabot/actions/workflows/pj_weekly_meetup_wednesday.yml/badge.svg)](https://github.com/pythonkr/pabot/actions/workflows/pj_weekly_meetup_wednesday.yml)
+
 PyConKR Arrangement Bot
 =======================
 
