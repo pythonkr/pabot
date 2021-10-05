@@ -10,6 +10,7 @@ NOW_TS = datetime.now().timestamp()
 
 
 def main():
+    return
     noti_2day_ago()
 
 
