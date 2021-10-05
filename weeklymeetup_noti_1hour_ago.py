@@ -24,6 +24,7 @@ def send_slack_message(slack_data):
 
 
 def noti_1hour_ago():
+    return
     if datetime.now().weekday() != 2:
         print('Notify only Wednesday')
         return
