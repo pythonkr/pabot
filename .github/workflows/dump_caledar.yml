@@ -2,7 +2,7 @@ name: dump calendar
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # KST 11:30
+    - cron: '1/15 * * * *'  # KST 11:30
 
 jobs:
   build:
