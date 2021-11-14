@@ -29,6 +29,5 @@ jobs:
     - uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: update calendar data
-        file_pattern: *.json
-        repository: ./data
+        file_pattern: data/*.json
 
