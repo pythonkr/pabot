@@ -28,7 +28,7 @@ ENV_KEY="GOOGLE_SERVICE_ACCOUNT_JSON_KEY"
 def main():
     #credentials = ServiceAccountCredentials.from_json_keyfile_name(TOKEN_JSON, SCOPES)
     if ENV_KEY in os.environ:
-        service_account_info = json.loads(os.environ[GOOGLE_SERVICE_ACCOUNT_JSON_KEY])
+        service_account_info = json.loads(os.environ[ENV_KEY])
     else:
         if os.path.exists(FILE_TOKEN_JSON):
             service_account_info = json.load(open(FILE_TOKEN_JSON))
