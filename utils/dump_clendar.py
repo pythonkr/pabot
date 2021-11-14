@@ -81,7 +81,7 @@ def main():
         sys.exit()
     # store on data directory
     calendar_json_dump_file = Path("../data/calendar.json")
-    json.dump(events, open(calendar_json_dump_file,"w")
+    json.dump(events, open(calendar_json_dump_file,"w"))
 
 
 if __name__ == '__main__':
