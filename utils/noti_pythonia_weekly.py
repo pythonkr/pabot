@@ -1,21 +1,26 @@
 import os.path
+import json
 import sys
 from requests import post
 from datetime import datetime, timedelta, timezone
 from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-from google.oauth2.credentials import Credentials
+from google.oauth2 import service_account
+# from google_auth_oauthlib.flow import InstalledAppFlow
+# from google.auth.transport.requests import Request
+# from google.oauth2.credentials import Credentials
 from zoneinfo import ZoneInfo
 
 
 KST = ZoneInfo("Asia/Seoul")
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-CALENDAR_ID = os.environ["PYCON_CALENDAR_ID"]
+PYCON_CALENDAR_ID = os.environ["PYCON_CALENDAR_ID"]
 ZOOM_LINK = os.environ["ZOOM_LINK"]
 PYCON_WEEKLY_DOC_URL = os.environ["PYCON_WEEKLY_DOC_URL"]
 PYCON_ICON_URL = os.environ["PYCON_ICON_URL"]
 WEB_HOOK_URL = os.environ["SLACK_WEB_HOOK"]
+
+ENV_KEY = "GOOGLE_SERVICE_ACCOUNT_JSON_KEY"
+FILE_TOKEN_JSON = "driveapi-327215-020a219d4cd3.json"
 
 
 def send_slack_message(slack_data):
@@ -130,19 +135,17 @@ def slack_noti_pythonia(diff_sec: str) -> str:
 
 
 def main() -> None:
-    creds = None
-    if os.path.exists('token.json'):
-        creds = Credentials.from_authorized_user_file('token.json', SCOPES)
-    if not creds or not creds.valid:
-        if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+    if ENV_KEY in os.environ:
+        service_account_info = json.loads(os.environ[ENV_KEY])
+    else:
+        if os.path.exists(FILE_TOKEN_JSON):
+            service_account_info = json.load(open(FILE_TOKEN_JSON))
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
-        with open('token.json', 'w') as token:
-            token.write(creds.to_json())
-    service = build('calendar', 'v3', credentials=creds)
+            print("GOOGLE_TOKEN_SHOULD EXIST")
+            sys.exit(1)
+    credentials = service_account.Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
+
+    service = build('calendar', 'v3', credentials=credentials)
 
     now_dt = datetime.now(timezone.utc)
     # now = datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
@@ -154,7 +157,7 @@ def main() -> None:
     end_time = tomorrow.isoformat() + 'Z'
 
     print('Getting the upcoming 10 events')
-    events_result = service.events().list(calendarId=CALENDAR_ID,
+    events_result = service.events().list(calendarId=PYCON_CALENDAR_ID,
                                           timeMin=start_time,
                                           timeMax=end_time,
                                           timeZone=KST,
