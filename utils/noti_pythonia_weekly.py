@@ -126,9 +126,9 @@ def noti_before_day(day: int) -> None:
 
 def slack_noti_pythonia(diff_sec: str) -> str:
     # 감시주기가 30분 간격으로 정해진 조건
-    if 900 <= diff_sec < 2700:  # 1시간
+    if 2700 <= diff_sec < 4500:  # 약 1시간
         noti_before_hour(1)
-    elif 2700 <= diff_sec < 4500:  # 2시간
+    elif 4500 <= diff_sec < 6300:  # 약 2시간
         noti_before_hour(2)
     elif 41400 <= diff_sec < 43200:  # 1일
         noti_before_day(1)
