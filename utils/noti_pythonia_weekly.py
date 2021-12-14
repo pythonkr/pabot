@@ -73,7 +73,7 @@ def noti_before_hour(hour: int) -> None:
 
 def noti_before_day(day: int) -> None:
     if datetime.now().weekday() != 0:
-        print('Notify only Monday')
+        print('Notify weekday')
         return
     title = (f'{"{day}일 후 회의 있는 날이에요!"}')
     message = (f'{":arrow_right: 참여가 가능해요 :o:"}\n'
@@ -124,14 +124,16 @@ def noti_before_day(day: int) -> None:
     send_slack_message(slack_data)
 
 
-def slack_noti_pythonia(diff_sec: str) -> str:
+def slack_noti_pythonia(diff_hour: int, diff_sec: int) -> None:
     # 감시주기가 30분 간격으로 정해진 조건
-    if 2700 <= diff_sec < 4500:  # 약 1시간
-        noti_before_hour(1)
-    elif 4500 <= diff_sec < 6300:  # 약 2시간
-        noti_before_hour(2)
-    elif 41400 <= diff_sec < 43200:  # 1일
-        noti_before_day(1)
+    if diff_hour == 1:
+        if 900 <= diff_sec < 2700:   # 1일
+            noti_before_day(1)
+    elif diff_hour == 0:
+        if 900 <= diff_sec < 2700:  # 1시간
+            noti_before_hour(1)
+        elif 2700 <= diff_sec < 4500:  # 2시간
+            noti_before_hour(2)
 
 
 def main() -> None:
@@ -174,7 +176,7 @@ def main() -> None:
         event_datetime = datetime.fromisoformat(start)
         print(start, event['summary'])
         diff_time = event_datetime - now_dt
-        slack_noti_pythonia(diff_time.seconds)
+        slack_noti_pythonia(diff_time.days, diff_time.seconds)
 
 
 if __name__ == '__main__':
