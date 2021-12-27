@@ -44,7 +44,7 @@ def noti_before_hour(hour: int) -> None:
             {
                 "fallback": "Weekly Meetup",
                 "color": "#9733EE",
-                "pretext": f"<!channel> {hour}시간 후에 회의 시작이에요!",
+                "pretext": f"<!channel> 잠시 후 20시에 회의 시작이에요!",
                 "fields": [
                     {
                         "value": message,
@@ -132,7 +132,7 @@ def slack_noti_pythonia(diff_hour: int, diff_sec: int) -> None:
     elif diff_hour == 0:
         if 900 <= diff_sec < 2700:  # 1시간
             noti_before_hour(1)
-        elif 2700 <= diff_sec < 4500:  # 2시간
+        elif 3600 <= diff_sec < 4500:  # 2시간
             noti_before_hour(2)
 
 
