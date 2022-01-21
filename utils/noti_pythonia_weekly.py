@@ -175,7 +175,10 @@ def main() -> None:
         start = event['start'].get('dateTime', event['start'].get('date'))
         event_datetime = datetime.fromisoformat(start)
         print(start, event['summary'])
-        diff_time = event_datetime - now_dt
+        try:
+            diff_time = event_datetime - now_dt
+        except Exception:
+            continue
         slack_noti_pythonia(diff_time.days, diff_time.seconds)
 
 
