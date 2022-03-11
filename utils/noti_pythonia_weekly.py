@@ -31,7 +31,7 @@ def send_slack_message(slack_data):
         raise Exception(response.status_code, response.text)
 
 
-def noti_before_hour(hour: int) -> None:
+def noti_before_hour(start: str, hour: int) -> None:
     message = (f'{"오늘 이야기하고 싶으신 내용이 있다면"}\n'
                f'{"회의록에 먼저 작성해주세요"}\n'
                f'{"혹은 오늘 회의록을 먼저 읽고 참석해주세요~ :wink:"}\n'
@@ -44,7 +44,7 @@ def noti_before_hour(hour: int) -> None:
             {
                 "fallback": "Weekly Meetup",
                 "color": "#9733EE",
-                "pretext": f"<!channel> 잠시 후 20시에 회의 시작이에요!",
+                "pretext": f"<!channel> 잠시 후 {start}에 회의 시작이에요!",
                 "fields": [
                     {
                         "value": message,
@@ -71,11 +71,11 @@ def noti_before_hour(hour: int) -> None:
     send_slack_message(slack_data)
 
 
-def noti_before_day(day: int) -> None:
+def noti_before_day(start: str, day: int) -> None:
     if datetime.now().weekday() != 0:
         print('Notify weekday')
         return
-    title = (f'{"{day}일 후 회의 있는 날이에요!"}')
+    title = (f'{"{day}일 후 회의 있는 날이에요!({start}"}')
     message = (f'{":arrow_right: 참여가 가능해요 :o:"}\n'
                f'{":arrow_right: 참여가 힘들어요 :x:"}\n'
                f'{" "}\n'
@@ -124,16 +124,16 @@ def noti_before_day(day: int) -> None:
     send_slack_message(slack_data)
 
 
-def slack_noti_pythonia(diff_hour: int, diff_sec: int) -> None:
+def slack_noti_pythonia(start: str, diff_hour: int, diff_sec: int) -> None:
     # 감시주기가 30분 간격으로 정해진 조건
     if diff_hour == 1:
         if 900 <= diff_sec < 2700:   # 1일
-            noti_before_day(1)
+            noti_before_day(start, 1)
     elif diff_hour == 0:
         if 900 <= diff_sec < 2700:  # 1시간
-            noti_before_hour(1)
+            noti_before_hour(start, 1)
         elif 3600 <= diff_sec < 4500:  # 2시간
-            noti_before_hour(2)
+            noti_before_hour(start, 2)
 
 
 def main() -> None:
@@ -179,7 +179,7 @@ def main() -> None:
             diff_time = event_datetime - now_dt
         except Exception:
             continue
-        slack_noti_pythonia(diff_time.days, diff_time.seconds)
+        slack_noti_pythonia(start, diff_time.days, diff_time.seconds)
 
 
 if __name__ == '__main__':
